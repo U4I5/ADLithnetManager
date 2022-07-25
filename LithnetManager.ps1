@@ -13,7 +13,6 @@ function Show-Menu {
     )
     Clear-Host
     Write-Host "================ $Title ================"
-    
     Write-Host "[+]: Taper '1' Pour Mot à Bannir."
     Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."
     Write-Host "[+]: Taper '3' Pour Retirer Un Mot Banni."
