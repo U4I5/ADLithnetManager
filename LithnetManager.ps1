@@ -4,7 +4,7 @@
 Import-Module LithnetPasswordProtection
 
 #Set your Database Lithnet
-Open-Store -Path "D:\password-protection\test-store"
+#Open-Store -Path "D:\password-protection\test-store"
 
 # Menu Function
 function Show-Menu {
@@ -13,14 +13,15 @@ function Show-Menu {
     )
     Clear-Host
     Write-Host "================ $Title ================"
-    Write-Host "[+]: Taper '1' Pour Mot à Bannir."
+    Write-Host "[+]: Taper '1' Pour Mot A  Bannir."
     Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."
     Write-Host "[+]: Taper '3' Pour Retirer Un Mot Banni."
-    Write-Host "[+]: Taper '4' Pour Importer Une Liste de mots Banni."
+    Write-Host "[+]: Taper '4' Pour Importer Une Liste de mots Bannis."
     Write-Host "[+]: Taper '5' Pour Tester des Mots de Passe Compromis."
     Write-Host "[+]: Taper '6' Pour Importer Une Liste de Mots de Passe Compromis."
-    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe hashés NTLM Compromis."
+    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."
     Write-Host "[+]: Taper 'Q' Pour quitter."
+    Write-Host
 
 }
 # Loop for interactive with Menu
@@ -28,6 +29,7 @@ do
  {
     Show-Menu
     $selection = Read-Host "Choisir Une Option"
+ 
     switch ($selection)
     {
     '1' {
@@ -42,14 +44,16 @@ do
         $retrunbool = Test-IsBannedWord  -Value $pass
         if ($retrunbool -eq 'True'){
             
-             Write-Host "Ce Mot Est Banni"
+            Write-Host "Ce Mot Est Banni"
+            Write-Host
         }else {
             Write-Host "Ce Mot Est Autorisé"
+            Write-Host
         }
         
     } '3' {
         
-        $msg3 = 'Taper le Mot à Retirer'
+        $msg3 = 'Taper le Mot a  Retirer'
         $pass = Read-Host -Prompt $msg3
         Remove-BannedWord -Value $pass
 
@@ -73,13 +77,13 @@ do
         
     }'6'{ 
 
-        $msg6 = 'Coller le Lien Du fichier ".txt" Format Hashé'
+        $msg6 = 'Coller le Lien Du fichier .txt'
         $pathfile2 = Read-Host -Prompt $msg6
         Import-CompromisedPasswords -Filename "$pathfile2"
 
     }'7'{ 
 
-    $msg7 = 'Coller le Lien Du fichier .txt'
+    $msg7 = 'Coller le Lien Du fichier ".txt" au Format Hashé'
     $pathfile3 = Read-Host -Prompt $msg7
     Import-CompromisedPasswordHashes -Filename "$pathfile3"
     
@@ -89,5 +93,3 @@ do
     pause
  }
  until ($selection -eq 'q')
-
-
