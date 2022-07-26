@@ -9,18 +9,26 @@ Import-Module LithnetPasswordProtection
 # Menu Function
 function Show-Menu {
     param (
-        [string]$Title = 'ADLithnetManager'
+        [string]$Title = @"          
+    -------------------------------------------------------------------------                                                          
+    _____ ____  __    _ _   _           _   _____                          
+    |  _  |    \|  |  |_| |_| |_ ___ ___| |_|     |___ ___ ___ ___ ___ ___  
+    |     |  |  |  |__| |  _|   |   | -_|  _| | | | .'|   | .'| . | -_|  _| 
+    |__|__|____/|_____|_|_| |_|_|_|_|___|_| |_|_|_|__,|_|_|__,|_  |___|_|   
+                                                          |___|         
+    -------------------------------------------------------------------------                                                                                                                                                                                                                                                                                         
+"@
     )
     Clear-Host
-    Write-Host "================ $Title ================"
-    Write-Host "[+]: Taper '1' Pour Mot A  Bannir."
-    Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."
-    Write-Host "[+]: Taper '3' Pour Retirer Un Mot Banni."
-    Write-Host "[+]: Taper '4' Pour Importer Une Liste de mots Bannis."
-    Write-Host "[+]: Taper '5' Pour Tester des Mots de Passe Compromis."
-    Write-Host "[+]: Taper '6' Pour Importer Une Liste de Mots de Passe Compromis."
-    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."
-    Write-Host "[+]: Taper 'Q' Pour quitter."
+    Write-Host $Title  -ForegroundColor Cyan
+    Write-Host "[+]: Taper '1' Pour Mot A Bannir."  -ForegroundColor Green
+    Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."  -ForegroundColor Green
+    Write-Host "[+]: Taper '3' Pour Retirer Un Mot Banni."  -ForegroundColor Green
+    Write-Host "[+]: Taper '4' Pour Importer Une Liste de mots Bannis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '5' Pour Tester des Mots de Passe Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '6' Pour Importer Une Liste de Mots de Passe Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper 'Q' Pour quitter." -ForegroundColor Red
     Write-Host
 
 }
@@ -44,16 +52,16 @@ do
         $retrunbool = Test-IsBannedWord  -Value $pass
         if ($retrunbool -eq 'True'){
             
-            Write-Host "Ce Mot Est Banni"
+            Write-Host "Ce Mot Est Banni" -ForegroundColor Red 
             Write-Host
         }else {
-            Write-Host "Ce Mot Est Autorisé"
+            Write-Host "Ce Mot Est Autorisé" -ForegroundColor Green 
             Write-Host
         }
         
     } '3' {
         
-        $msg3 = 'Taper le Mot a  Retirer'
+        $msg3 = 'Taper le Mot a Retirer'
         $pass = Read-Host -Prompt $msg3
         Remove-BannedWord -Value $pass
 
@@ -70,9 +78,9 @@ do
         $retrunbool = Test-IsCompromisedPassword -Value $pass
         if ($retrunbool -eq 'True'){
             
-             Write-Host "Ce Mot de Passe Est Banni"
+             Write-Host "Ce Mot de Passe Est Banni" -ForegroundColor Red 
         }else {
-            Write-Host "Ce Mot de Passe Est Autorisé"
+            Write-Host "Ce Mot de Passe Est Autorisé" -ForegroundColor Green 
         }
         
     }'6'{ 
