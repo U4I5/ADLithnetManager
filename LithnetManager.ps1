@@ -20,14 +20,15 @@ function Show-Menu {
 "@
     )
     Clear-Host
-    Write-Host $Title  -ForegroundColor Cyan
-    Write-Host "[+]: Taper '1' Pour Mot A Bannir."  -ForegroundColor Green
+    Write-Host $Title  -ForegroundColor yellow 
+    Write-Host "[+]: Taper '1' Pour Mot A Bannir." -ForegroundColor Green
     Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."  -ForegroundColor Green
-    Write-Host "[+]: Taper '3' Pour Retirer Un Mot Banni."  -ForegroundColor Green
-    Write-Host "[+]: Taper '4' Pour Importer Une Liste de mots Bannis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '5' Pour Tester des Mots de Passe Compromis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '6' Pour Importer Une Liste de Mots de Passe Compromis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '3' Pour Tester Un Mot de Passe Compromi."  -ForegroundColor Green
+    Write-Host "[+]: Taper '4' Pour Retirer Un Mot Banni." -ForegroundColor Green
+    Write-Host "[+]: Taper '5' Pour Retirer Un Mot Passe Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '6' Pour Importer Une Liste de mots Bannis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '7' Pour Importer Une Liste de Mots de Passe Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '8' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."  -ForegroundColor Green
     Write-Host "[+]: Taper 'Q' Pour quitter." -ForegroundColor Red
     Write-Host
 
@@ -36,16 +37,16 @@ function Show-Menu {
 do
  {
     Show-Menu
-    $selection = Read-Host "Choisir Une Option"
+    $selection = Read-Host "Choisir Une Option" 
  
     switch ($selection)
     {
-    '1' {
+     '1'{
         $msg1 = 'Taper Le Mot'
         $pass = Read-Host -Prompt $msg1
         Add-BannedWord -Value $pass
 
-    } '2' {
+    }'2'{
 
         $msg2 = 'Taper Le Mot'
         $pass = Read-Host -Prompt $msg2
@@ -59,40 +60,48 @@ do
             Write-Host
         }
         
-    } '3' {
-        
-        $msg3 = 'Taper le Mot a Retirer'
+    }'3'{ 
+
+        $msg3 = 'Taper Le Mot de Passe'
         $pass = Read-Host -Prompt $msg3
-        Remove-BannedWord -Value $pass
-
-    } '4' {
-
-        $msg4 = 'Coller le Lien Du fichier .txt'
-        $pathfile= Read-Host -Prompt $msg4
-        Import-BannedWords -Filename "$pathfile"
-
-    }'5'{ 
-
-        $msg5 = 'Taper Le Mot de Passe'
-        $pass = Read-Host -Prompt $msg5
         $retrunbool = Test-IsCompromisedPassword -Value $pass
         if ($retrunbool -eq 'True'){
             
-             Write-Host "Ce Mot de Passe Est Banni" -ForegroundColor Red 
+             Write-Host "Ce Mot de Passe Est Compromis." -ForegroundColor Red 
         }else {
             Write-Host "Ce Mot de Passe Est Autorisé" -ForegroundColor Green 
         }
+
+    }'4'{
         
-    }'6'{ 
+        $msg4 = 'Taper le Mot a Retirer'
+        $pass = Read-Host -Prompt $msg4
+        Remove-BannedWord -Value $pass
 
-        $msg6 = 'Coller le Lien Du fichier .txt'
-        $pathfile2 = Read-Host -Prompt $msg6
-        Import-CompromisedPasswords -Filename "$pathfile2"
+    }'5'{
+        
+        $msg5 = 'Taper le Mot de Passe Compromis à Retirer'
+        $pass = Read-Host -Prompt $msg5
+        Remove-CompromisedPassword -Value $pass
 
+    }'6'{
+
+        $msg6 = 'Coller le Lien Du fichier ".txt"'
+        $pathfile= Read-Host -Prompt $msg6
+        Import-BannedWords -Filename "$pathfile"
+
+  
+        
     }'7'{ 
 
-    $msg7 = 'Coller le Lien Du fichier ".txt" au Format Hashé'
-    $pathfile3 = Read-Host -Prompt $msg7
+        $msg7 = 'Coller le Lien Du fichier .txt'
+        $pathfile2 = Read-Host -Prompt $msg7
+        Import-CompromisedPasswords -Filename "$pathfile2"
+
+    }'8'{ 
+
+    $msg8 = 'Coller le Lien Du fichier ".txt" au Format Hashé'
+    $pathfile3 = Read-Host -Prompt $msg8
     Import-CompromisedPasswordHashes -Filename "$pathfile3"
     
     }

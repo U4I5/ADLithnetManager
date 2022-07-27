@@ -1,5 +1,4 @@
 # ADLithnetManager
-
 The PowerShell module contains the all-in-one cmdlets : 
 --
 - Add‐BannedWord
@@ -7,5 +6,6 @@ The PowerShell module contains the all-in-one cmdlets :
 - Remove-BannedWord
 - Import-BannedWords
 - Test-IsCompromisedPassword
+- Remove-CompromisedPassword
 - Import-CompromisedPasswords
 - Import-CompromisedPasswordHashes
