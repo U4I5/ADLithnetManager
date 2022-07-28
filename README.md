@@ -9,3 +9,8 @@ The PowerShell module contains the all-in-one cmdlets :
 - Remove-CompromisedPassword
 - Import-CompromisedPasswords
 - Import-CompromisedPasswordHashes
+
+Personally i added
+--
+  - Remove-List-BannedWord 
+  - Remove-List-CompromisedPassword 
