@@ -21,7 +21,7 @@ function Show-Menu {
     )
     Clear-Host
     Write-Host $Title  -ForegroundColor yellow 
-    Write-Host "[+]: Taper '1' Pour Mot A Bannir." -ForegroundColor Green
+    Write-Host "[+]: Taper '1' Pour Ajouter Un Mot A Bannir." -ForegroundColor Green
     Write-Host "[+]: Taper '2' Pour Tester Un Mot Banni."  -ForegroundColor Green
     Write-Host "[+]: Taper '3' Pour Tester Un Mot de Passe Compromi."  -ForegroundColor Green
     Write-Host "[+]: Taper '4' Pour Retirer Un Mot Banni." -ForegroundColor Green
