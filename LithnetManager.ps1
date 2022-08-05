@@ -53,7 +53,7 @@ do
 
         $msg2 = 'Taper Le Mot'
         $pass = Read-Host -Prompt $msg2
-        $retrunbool = Test-IsBannedWord  -Value $pass
+        $returnbool = Test-IsBannedWord  -Value $pass
         if ($returnbool -eq 'True'){
             
             Write-Host "Ce Mot Est Banni" -ForegroundColor Red 
@@ -68,7 +68,7 @@ do
         $msg3 = 'Taper Le Mot de Passe'
         $pass = Read-Host -Prompt $msg3
         $returnbool = Test-IsCompromisedPassword -Value $pass
-        if ($retrunbool -eq 'True'){
+        if ($returnbool -eq 'True'){
             
              Write-Host "Ce Mot de Passe Est Compromis." -ForegroundColor Red 
         }else {
