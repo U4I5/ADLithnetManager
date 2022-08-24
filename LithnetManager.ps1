@@ -4,7 +4,7 @@
 Import-Module LithnetPasswordProtection
 
 #Set your Database Lithnet
-#Open-Store -Path "D:\password-protection\test-store"
+#Open-Store 'C:\Program Files\Lithnet\Active Directory Password Protection\Store'
 
 # Menu Function
 function Show-Menu {
@@ -26,11 +26,11 @@ function Show-Menu {
     Write-Host "[+]: Taper '3' Pour Tester Un Mot de Passe Compromi."  -ForegroundColor Green
     Write-Host "[+]: Taper '4' Pour Retirer Un Mot Banni." -ForegroundColor Green
     Write-Host "[+]: Taper '5' Pour Retirer Un Mot Passe Compromis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '6' Pour Retirer Une Liste de mots Bannis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '6' Pour Retirer Une Liste de Mots Bannis."  -ForegroundColor Green
     Write-Host "[+]: Taper '7' Pour Retirer Une Liste de Mots de Passe Compromis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '8' Pour Importer Une Liste de mots Bannis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '8' Pour Importer Une Liste de Mots Bannis."  -ForegroundColor Green
     Write-Host "[+]: Taper '9' Pour Importer Une Liste de Mots de Passe Compromis."  -ForegroundColor Green
-    Write-Host "[+]: Taper '10' Pour Importer Une Liste de Mots de Passe Hashés NTLM Compromis."  -ForegroundColor Green
+    Write-Host "[+]: Taper '10' Pour Importer Une Liste de Mots de Passe Hashes NTLM Compromis."  -ForegroundColor Green
     Write-Host "[+]: Taper 'Q' Pour quitter." -ForegroundColor Red
     Write-Host
 
