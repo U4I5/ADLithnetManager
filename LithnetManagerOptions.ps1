@@ -10,7 +10,8 @@ $selection = Get-Content .\selection.txt
 Remove-Item .\selection.txt
 
 #Absolute path of the log file of banned words added
-$log_path = "C:\Users\ul.oberlin\Documents\Travail\test.txt"
+$log_path = Split-Path $MyInvocation.MyCommand.Path -Parent
+$log_path = $log_path + '\log.txt'
 
 #Switch function used to select option
 switch ($selection)

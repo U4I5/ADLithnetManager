@@ -26,7 +26,7 @@ function Show-Menu {
 "@
     )
     Clear-Host
-    Write-Host $Title  -ForegroundColor Yellow 
+    Write-Host $Title  -ForegroundColor DarkCyan
     Write-Host "[+]: Type '1' To Add A Banned Word." -ForegroundColor DarkGreen
     Write-Host "[+]: Type '2' To Test A banned Word."  -ForegroundColor DarkGreen
     Write-Host "[+]: Type '3' To Test A Compromised Password."  -ForegroundColor DarkGreen
@@ -38,7 +38,7 @@ function Show-Menu {
     Write-Host "[+]: Type '9' To Import A List Of Compromised Passwords."  -ForegroundColor DarkGreen
     Write-Host "[+]: Type '10' To Import A List Of Compromised Password NTLM Hashes."  -ForegroundColor DarkGreen
     Write-Host
-    Write-Host "[+]: Type 'L' To Print Logs Of Banned Words Added" -ForegroundColor DarkCyan
+    Write-Host "[+]: Type 'L' To Print Logs Of Banned Words Added" -ForegroundColor DarkYellow
     Write-Host "[+]: Type 'Q' To Quit." -ForegroundColor Red
     Write-Host
 
