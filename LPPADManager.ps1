@@ -1,16 +1,16 @@
-#Coded by U4I5 and Yurisu
+# Written by U4I5 and Yurisu13
 
-#Sets the correct current location
+# Set the correct current location
 $location = Split-Path $MyInvocation.MyCommand.Path -Parent
 Set-Location -Path $location
 
-#Imports module 
+# Import LPP module 
 Import-Module LithnetPasswordProtection
 
-#Set your Database Lithnet :
-#Open-Store -Path "D:\password-protection\test-store"
+# Set your Database Lithnet :
+# Open-Store -Path "absolute path"
 
-#Menu Function
+# Menu Function
 function Show-Menu {
     param (
         [string]$Title = @"
@@ -44,18 +44,18 @@ function Show-Menu {
     Write-Host
 
 }
-#Infinite loop to interact with Menu
+# Infinite loop to interact with Menu
 do {
-    #Prints the menu and ask an option to display
+    # Print the menu and ask an option to display
     Show-Menu
     $selection = Read-Host "  Select An Option"
 
-    #Checks if "Q" is selected to exit or continue to the option selection
+    # Check if "Q" is selected to exit or continue to the option selection
     if ($selection -eq 'q') {exit}
     else {
-        #Sets the content of the $selection variable in a temporary text file
+        # Set the content of the $selection variable in a temporary text file
         Set-Content .\selection.txt $selection
-        #Opens the selected option in a new powershell window
+        # Open the selected option in a new powershell window
         Start-Process powershell {powershell.exe -file '.\LPPADManagerOptions.ps1'}
     }
 }
