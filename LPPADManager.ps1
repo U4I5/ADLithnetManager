@@ -1,4 +1,5 @@
 # Written by U4I5 and Yurisu13
+# LPPADManager v1.2.0 last update 28/07/2023
 
 # Set the correct current location
 $location = Split-Path $MyInvocation.MyCommand.Path -Parent
@@ -29,7 +30,7 @@ function Show-Menu {
     Clear-Host
     Write-Host $Title  -ForegroundColor DarkCyan
     Write-Host "  [+]: Type '1' To Add A Banned Word." -ForegroundColor DarkGreen
-    Write-Host "  [+]: Type '2' To Test A banned Word."  -ForegroundColor DarkGreen
+    Write-Host "  [+]: Type '2' To Test A Banned Word."  -ForegroundColor DarkGreen
     Write-Host "  [+]: Type '3' To Test A Compromised Password."  -ForegroundColor DarkGreen
     Write-Host "  [+]: Type '4' To Remove A Banned Word." -ForegroundColor DarkGreen
     Write-Host "  [+]: Type '5' To Remove A Compromised Password."  -ForegroundColor DarkGreen
@@ -45,7 +46,7 @@ function Show-Menu {
 
 }
 # Infinite loop to interact with Menu
-do {
+While ($True) {
     # Print the menu and ask an option to display
     Show-Menu
     $selection = Read-Host "  Select An Option"
@@ -59,4 +60,3 @@ do {
         Start-Process powershell {powershell.exe -file '.\LPPADManagerOptions.ps1'}
     }
 }
-until ('a' -ne 'a')
