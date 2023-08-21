@@ -1,5 +1,5 @@
 # Written by U4I5 and Yurisu13
-# LPPADManager v1.2.0 last update 28/07/2023
+# LPPADManager v1.3.0 last update 21/08/2023
 
 # Set the correct current location
 $location = Split-Path $MyInvocation.MyCommand.Path -Parent
