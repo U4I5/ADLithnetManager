@@ -1,225 +1,194 @@
-#Message to indicate how to close the option
-Write-Host
-Write-Host "Press Ctrl+C to close the current option..." -ForegroundColor Yellow
-Write-Host
-Write-Host
+# Display instruction to close the current option
+Write-Host "`n Press Ctrl+C to close the current option...`n`n" -ForegroundColor Yellow
 
-#Gets the selected option in the temporary text file
+# Get the selected option contained in the temporary txt file
 $selection = Get-Content .\selection.txt
-#Deletes the temporary text file
+# Delete the temporary txt file
 Remove-Item .\selection.txt
 
-#Absolute path of the log file of banned words added
-$log_path = Split-Path $MyInvocation.MyCommand.Path -Parent
-$log_path = $log_path + '\log.txt'
+# Absolute path of the banned words log file
+$location = Split-Path $MyInvocation.MyCommand.Path -Parent
+$log_path = "$location\log.txt"
 
-#Switch function used to select option
+# Switch function used to select option
 switch ($selection)
 {
     '1'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable message
-            $msg1 = 'Type Word To Ban'
-            Write-Host
-            $pass = Read-Host -Prompt $msg1
-            #Sets variable as false as default
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $pass = Read-Host "`n Type Banned Word to add "
+            # Define a variable for check result
             $already_banned = 'False'
-            #Cheks log file if the word to ban has been already added
+            # Chek log file if the word to ban has already been added
             foreach ($line in (Get-Content $log_path)) {
-                #Checks match with the banned words log file
                 if ($line -like $pass + ';*') {
                     $already_banned = 'True'
-                    Write-Host
-                    Write-Host "This word is already banned" -ForegroundColor Red
-                    Write-Host
+                    Write-Host "`n This word is already banned`n" -ForegroundColor Red
                 }
             }
-            #Checks if the word is not already banned
+            # Log the new Banned Word if the word is not already banned
             if ($already_banned -like 'False') {
-                #Gets date for log
                 $log_date = Get-Date -Format "dd-MM-yyyy"
-                #Adds a new line in the log file
                 "{0};{1}" -f $pass,$log_date | add-content -path $log_path
-                #Lithnet functiun to add just one Banned Word
+                # Lithnet functiun to add a Banned Word
                 Add-BannedWord -Value $pass
             }
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '2'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable message
-            $msg2 = 'Type Word To Test'
-            $pass = Read-Host -Prompt $msg2
-            #Lithnet functiun to test if a Word is Banned
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $pass = Read-Host " Type word to test "
+            # Lithnet functiun to test if a word is banned
             $returnbool = Test-IsBannedWord  -Value $pass
+            # If.. Else to display result to the user
             if ($returnbool -eq 'True') {
-                Write-Host "This Word Is Banned" -ForegroundColor Red
-                Write-Host
+                Write-Host "`n This word is banned`n" -ForegroundColor Red
             }
             else {
-                Write-Host "This Word Is Not Banned" -ForegroundColor Green
-                Write-Host
+                Write-Host "`n This word is not banned`n" -ForegroundColor Green
             }
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '3'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable message
-            $msg3 = 'Type Password To Test'
-            $pass = Read-Host -Prompt $msg3
-            #Lithnet functiun to test if a Password is Compromised
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $pass = Read-Host " Type password to test "
+            # Lithnet functiun to test if a password is compromised
             $returnbool = Test-IsCompromisedPassword -Value $pass
+            # If.. Else to display result to the user
             if ($returnbool -eq 'True') {
-                Write-Host "This Password Is Compromised." -ForegroundColor Red 
+                Write-Host " This password is compromised" -ForegroundColor Red
             }
             else {
-                Write-Host "This Password Is Authorized" -ForegroundColor Green 
+                Write-Host " This password is authorized" -ForegroundColor Green
             }
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '4'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg4 = 'Type Banned Word To Remove'
-            #Variable of the Bannedword
-            $pass = Read-Host -Prompt $msg4
-            #Lithnet function to remove just one Banned Word
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $pass = Read-Host " Type Banned Word to remove "
+            # Lithnet function to remove just one Banned Word
             Remove-BannedWord -Value $pass
-            #Gets content of the log file line per line
+            # Chek log file to find Banned Word and delete it
             $log_file = foreach ($line in (Get-Content $log_path))
             {
-                #Checks match with the banned word and replaces the line to nothing
+                # If match the banned word -> replace the line into nothing
                 if ($line -like $pass + ';*') {}
                 else {$line}
             }
-            #Sets mofications into the log file
+            # Set changes to the log file
             $log_file | Set-Content $log_path
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '5'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg5 = 'Type Compromised Password To Remove'
-            #Variable of User password's 
-            $pass = Read-Host -Prompt $msg5
-            #Lithnet function to remove just one Compromised Password
-            Remove-CompromisedPassword -Value $pass
-        }
-        until ('a' -ne 'a')
+        # While loop to stay in the selected option
+        While ($True) {
 
+            $pass = Read-Host " Type Compromised Password to remove "
+            # Lithnet function to remove a Compromised Password
+            Remove-CompromisedPassword -Value $pass
+
+        }
     }
     '6'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg6 =  'Paste The Absolute Path Of Your ".txt" File'
-            #Variable path of wordlist content password
-            $path = Read-Host -Prompt $msg6
-            #Get wordlist.txt as list readable by powershell
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $path = Read-Host " Paste the absolute path of your '.txt' File "
+            # Get wordlist.txt as list readable by powershell
             $wordlist = Get-Content -Path $path
-            #Loop Foreach to select line by line password in Wordlist
+            # Foreach loop to select line by line password in Wordlist
             foreach ($word in $wordlist) {
-                #Lithnet function to remove Banned Words stored in database
+                # Lithnet function to remove Banned Words stored in database
                 Remove-CompromisedPassword -Value $word
             }
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '7'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg7 = 'Paste The Absolute Path Of Your ".txt" File'
-            #Variable path of wordlist content password
-            $path = Read-Host -Prompt $msg7
-            #Gets wordlist.txt as list readable by powershell
+        # While loop to stay in the selected option
+        While ($True) {
+
+            $path = Read-Host " Paste the absolute path of your '.txt' file"
+            # Get wordlist.txt as list readable by powershell
             $wordlist = Get-Content -Path $path
-            #Loop Foreach to select line by line password in Wordlist
+            # Foreach loop to select line by line password in Wordlist
             foreach ($pass in $wordlist) {
-                #Lithnet function to remove Compromised Passwords stored in database
+                # Lithnet function to remove Compromised Passwords stored in database
                 Remove-CompromisedPassword -Value $pass
             }
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '8'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg8 = 'Paste The Absolute Path Of Your ".txt" File'
-            $pathfile = Read-Host -Prompt $msg8
-            #Lithnet function to import Banned Words in database
-            Import-BannedWords -Filename "$pathfile"
-        }
-        until ('a' -ne 'a')
+        # While loop to stay in the selected option
+        While ($True) {
 
+            $pathfile = " Paste the absolute path of your '.txt' file"
+            # Lithnet function to import Banned Words in database
+            Import-BannedWords -Filename "$pathfile"
+
+        }
     }
     '9'
     { 
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg9 = 'Paste The Absolute Path Of Your ".txt" File'
-            $pathfile2 = Read-Host -Prompt $msg9
-            #Lithnet function to import Compromised Passwords in database
+        # While loop to stay in the selected option
+        While ($True) {
+            
+            $pathfile2 = Read-Host " Paste the absolute path of your '.txt' file"
+            # Lithnet function to import Compromised Passwords in database
             Import-CompromisedPasswords -Filename "$pathfile2"
-        }
-        until ('a' -ne 'a')
 
+        }
     }
     '10'
     { 
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
-            #Variable Message
-            $msg10 = 'Paste The Absolute Path Of Your ".txt" File'
-            $pathfile3 = Read-Host -Prompt $msg10
-            #Lithnet function to import Compromised Passwords Hashes in database
-            Import-CompromisedPasswordHashes -Filename "$pathfile3"
-        }
-        until ('a' -ne 'a')
+        # While loop to stay in the selected option
+        While ($True) {
 
+            $pathfile3 = Read-Host " Paste the absolute path of your '.txt' file"
+            # Lithnet function to import Compromised Passwords Hashes in database
+            Import-CompromisedPasswordHashes -Filename "$pathfile3"
+
+        }
     }
     'L'
     {
-        #Recurrent loop "do.. until" to stay in the option selected
-        do {
+        # While loop to stay in the selected option
+        While ($True) {
+
             Clear-Host
-            #Message to indicate how to close the option and more information
+            # Message to indicate how to close the option and more information
             Write-Host
-            Write-Host "Press Ctrl+C to close the current option..." -ForegroundColor Yellow
+            Write-Host " Press Ctrl+C to close the current option..." -ForegroundColor Yellow
             Write-Host
-            Write-Host "Press 'Enter' if you want to refresh the log content" -ForegroundColor DarkCyan
+            Write-Host " Press 'Enter' if you want to refresh the log content" -ForegroundColor DarkCyan
             Write-Host
-            #Imports the log file in csv format
+            # Import the log file in csv format
             Import-Csv -Path $log_path -Delimiter ";" | Format-Table
-            #Permits to press Enter to refresh the log content
+            # Permit the user to press Enter to refresh the log content
             Read-Host
-        }
-        until ('a' -ne 'a')
-        
+
+        }  
     }
 }
+# While loop to stay in the script if an error occurs
+while ($True) {}
