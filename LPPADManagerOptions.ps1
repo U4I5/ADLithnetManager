@@ -142,7 +142,7 @@ switch ($selection)
         # While loop to stay in the selected option
         While ($True) {
 
-            $pathfile = " Paste the absolute path of your '.txt' file"
+            $pathfile = Read-Host " Paste the absolute path of your '.txt' file"
             # Lithnet function to import Banned Words in database
             Import-BannedWords -Filename "$pathfile"
 
@@ -153,9 +153,9 @@ switch ($selection)
         # While loop to stay in the selected option
         While ($True) {
             
-            $pathfile2 = Read-Host " Paste the absolute path of your '.txt' file"
+            $pathfile = Read-Host " Paste the absolute path of your '.txt' file"
             # Lithnet function to import Compromised Passwords in database
-            Import-CompromisedPasswords -Filename "$pathfile2"
+            Import-CompromisedPasswords -Filename "$pathfile"
 
         }
     }
@@ -164,9 +164,9 @@ switch ($selection)
         # While loop to stay in the selected option
         While ($True) {
 
-            $pathfile3 = Read-Host " Paste the absolute path of your '.txt' file"
+            $pathfile = Read-Host " Paste the absolute path of your '.txt' file"
             # Lithnet function to import Compromised Passwords Hashes in database
-            Import-CompromisedPasswordHashes -Filename "$pathfile3"
+            Import-CompromisedPasswordHashes -Filename "$pathfile"
 
         }
     }
