@@ -11,6 +11,7 @@ It's impossible to check the content of stores, and it can be annoying to rememb
 so we decided to make a log file only for banned words because we think that is the most important feature in LPP.
 ### How can I make it works on my Domain Controller ?
 You simply have to [install](https://github.com/U4I5/LPPADManager/archive/refs/heads/main.zip) our code, and then follow these steps :
-* Launch the script "LPPADManagerOpptions.ps1" for the first time. (Usefull for authorizations !)
-* Launch also the main script "LPPADManager.ps1".
-* Now you can use the first script !
+* Unzip the LPPADManager directory
+* Get into it
+* Manually run "LPPADManagerOptions.ps1" for the first time. (Usefull for authorizations)
+* Now you can use "LPPADManager.ps1" (main script) !
