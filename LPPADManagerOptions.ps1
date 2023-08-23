@@ -116,7 +116,7 @@ switch ($selection)
             # Foreach loop to select line by line password in Wordlist
             foreach ($word in $wordlist) {
                 # Lithnet function to remove Banned Words stored in database
-                Remove-CompromisedPassword -Value $word
+                Remove-BannedWord -Value $word
             }
 
         }
